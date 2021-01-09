@@ -22,6 +22,9 @@ function GameOver () {
     r.delete()
     r.delete()
     r2.delete()
+    music.playTone(932, music.beat(BeatFraction.Whole))
+    music.playTone(831, music.beat(BeatFraction.Whole))
+    music.playTone(784, music.beat(BeatFraction.Whole))
     Animation = images.createImage(`
         # . . . #
         . . . . .
@@ -61,6 +64,7 @@ let croc3: game.LedSprite = null
 let croc2: game.LedSprite = null
 let croc1: game.LedSprite = null
 let man: game.LedSprite = null
+basic.showString("Do you want to do easy mode or hard mode? ")
 man = game.createSprite(0, 2)
 croc1 = game.createSprite(1, 2)
 croc2 = game.createSprite(2, 2)
