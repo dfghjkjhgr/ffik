@@ -64,7 +64,6 @@ let croc3: game.LedSprite = null
 let croc2: game.LedSprite = null
 let croc1: game.LedSprite = null
 let man: game.LedSprite = null
-basic.showString("Do you want to do easy mode or hard mode? ")
 man = game.createSprite(0, 2)
 croc1 = game.createSprite(1, 2)
 croc2 = game.createSprite(2, 2)
@@ -75,7 +74,10 @@ o = game.createSprite(4, 1)
 r = game.createSprite(4, 2)
 r2 = game.createSprite(4, 3)
 d = game.createSprite(4, 4)
-let speed = 1000
+let speed = 800
+let directionCroc1 = 1
+let DirectionCroc2 = -1
+let DirectionCroc3 = 1
 man.set(LedSpriteProperty.Blink, 200)
 basic.forever(function () {
     if (man.isTouching(croc1)) {
@@ -90,33 +92,56 @@ basic.forever(function () {
     if (man.isTouching(h)) {
         score += 1
         man.set(LedSpriteProperty.X, 0)
-        speed += -75
+        speed += -50
     }
     if (man.isTouching(o)) {
         score += 1
         man.set(LedSpriteProperty.X, 0)
-        speed += -75
+        speed += -50
     }
     if (man.isTouching(r)) {
         score += 1
         man.set(LedSpriteProperty.X, 0)
-        speed += -75
+        speed += -50
     }
     if (man.isTouching(r2)) {
         score += 1
         man.set(LedSpriteProperty.X, 0)
-        speed += -75
+        speed += -50
     }
     if (man.isTouching(d)) {
         score += 1
         man.set(LedSpriteProperty.X, 0)
-        speed += -500
+        speed += -50
     }
 })
 basic.forever(function () {
-    croc1.set(LedSpriteProperty.Y, randint(0, 5))
+    if (croc1.get(LedSpriteProperty.Y) == 4) {
+        croc1.change(LedSpriteProperty.Y, directionCroc1)
+        directionCroc1 = -1
+    } else if (croc1.get(LedSpriteProperty.Y) == 0) {
+        croc1.change(LedSpriteProperty.Y, directionCroc1)
+        directionCroc1 = 1
+    } else {
+        croc1.change(LedSpriteProperty.Y, directionCroc1)
+    }
     basic.pause(speed)
-    croc2.set(LedSpriteProperty.Y, randint(0, 5))
-    basic.pause(speed)
-    croc3.set(LedSpriteProperty.Y, randint(0, 5))
+    if (croc2.get(LedSpriteProperty.Y) == 4) {
+        croc2.change(LedSpriteProperty.Y, DirectionCroc2)
+        DirectionCroc2 = -1
+    } else if (croc2.get(LedSpriteProperty.Y) == 0) {
+        croc2.change(LedSpriteProperty.Y, DirectionCroc2)
+        DirectionCroc2 = 1
+    } else {
+        croc2.change(LedSpriteProperty.Y, DirectionCroc2)
+    }
+    if (croc3.get(LedSpriteProperty.Y) == 4) {
+        croc3.change(LedSpriteProperty.Y, DirectionCroc3)
+        DirectionCroc3 = -1
+    } else if (croc3.get(LedSpriteProperty.Y) == 0) {
+        croc3.change(LedSpriteProperty.Y, DirectionCroc3)
+        DirectionCroc3 = 1
+    } else {
+        croc3.change(LedSpriteProperty.Y, DirectionCroc3)
+    }
 })
