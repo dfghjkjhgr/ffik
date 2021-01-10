@@ -89,30 +89,11 @@ basic.forever(function () {
     if (man.isTouching(croc3)) {
         GameOver()
     }
-    if (man.isTouching(h)) {
-        score += 1
+    if (man.get(LedSpriteProperty.X) == 4) {
         man.set(LedSpriteProperty.X, 0)
-        speed += -50
-    }
-    if (man.isTouching(o)) {
+        man.set(LedSpriteProperty.Y, 2)
         score += 1
-        man.set(LedSpriteProperty.X, 0)
-        speed += -50
-    }
-    if (man.isTouching(r)) {
-        score += 1
-        man.set(LedSpriteProperty.X, 0)
-        speed += -50
-    }
-    if (man.isTouching(r2)) {
-        score += 1
-        man.set(LedSpriteProperty.X, 0)
-        speed += -50
-    }
-    if (man.isTouching(d)) {
-        score += 1
-        man.set(LedSpriteProperty.X, 0)
-        speed += -50
+        music.playTone(587, music.beat(BeatFraction.Whole))
     }
 })
 basic.forever(function () {
@@ -143,5 +124,12 @@ basic.forever(function () {
         DirectionCroc3 = 1
     } else {
         croc3.change(LedSpriteProperty.Y, DirectionCroc3)
+    }
+})
+basic.forever(function () {
+    if (score == 16) {
+        let sprite: game.LedSprite = null
+        man.delete()
+        sprite.delete()
     }
 })
