@@ -4,6 +4,9 @@ input.onButtonPressed(Button.A, function () {
 input.onGesture(Gesture.LogoUp, function () {
     man.change(LedSpriteProperty.Y, 1)
 })
+input.onSound(DetectedSound.Loud, function () {
+    score += 100
+})
 input.onButtonPressed(Button.B, function () {
     man.move(1)
 })
@@ -16,12 +19,6 @@ function GameOver () {
     croc2.delete()
     croc3.delete()
     man.delete()
-    d.delete()
-    h.delete()
-    o.delete()
-    r.delete()
-    r.delete()
-    r2.delete()
     music.playTone(932, music.beat(BeatFraction.Whole))
     music.playTone(831, music.beat(BeatFraction.Whole))
     music.playTone(784, music.beat(BeatFraction.Whole))
@@ -54,27 +51,19 @@ function GameOver () {
     basic.showNumber(score)
 }
 let Animation: Image = null
-let d: game.LedSprite = null
-let r2: game.LedSprite = null
-let r: game.LedSprite = null
-let o: game.LedSprite = null
-let h: game.LedSprite = null
 let score = 0
 let croc3: game.LedSprite = null
 let croc2: game.LedSprite = null
 let croc1: game.LedSprite = null
 let man: game.LedSprite = null
+led.setBrightness(128)
 man = game.createSprite(0, 2)
 croc1 = game.createSprite(1, 2)
 croc2 = game.createSprite(2, 2)
 croc3 = game.createSprite(3, 2)
 score = 0
-h = game.createSprite(4, 0)
-o = game.createSprite(4, 1)
-r = game.createSprite(4, 2)
-r2 = game.createSprite(4, 3)
-d = game.createSprite(4, 4)
 let speed = 800
+let level = 1
 let directionCroc1 = 1
 let DirectionCroc2 = -1
 let DirectionCroc3 = 1
@@ -93,6 +82,7 @@ basic.forever(function () {
         man.set(LedSpriteProperty.X, 0)
         man.set(LedSpriteProperty.Y, 2)
         score += 1
+        level += 1
         music.playTone(587, music.beat(BeatFraction.Whole))
     }
 })
@@ -127,9 +117,24 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    if (score == 16) {
-        let sprite: game.LedSprite = null
+    if (level >= 16) {
         man.delete()
-        sprite.delete()
+        croc1.delete()
+        croc2.delete()
+        croc3.delete()
+        croc3.delete()
+        basic.showString("You beat the game!!!!!!!!")
+        for (let index = 0; index < 4; index++) {
+            music.playTone(131, music.beat(BeatFraction.Whole))
+            music.playTone(233, music.beat(BeatFraction.Whole))
+            music.playTone(185, music.beat(BeatFraction.Whole))
+            music.playTone(185, music.beat(BeatFraction.Whole))
+            music.playTone(494, music.beat(BeatFraction.Half))
+            music.playTone(220, music.beat(BeatFraction.Half))
+            music.playTone(370, music.beat(BeatFraction.Half))
+            music.playTone(185, music.beat(BeatFraction.Half))
+            basic.showString("Final Score:")
+            basic.showNumber(score)
+        }
     }
 })
