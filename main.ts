@@ -1,11 +1,11 @@
 input.onButtonPressed(Button.A, function () {
     man.move(-1)
 })
+input.onGesture(Gesture.FreeFall, function () {
+    score += 100
+})
 input.onGesture(Gesture.LogoUp, function () {
     man.change(LedSpriteProperty.Y, 1)
-})
-input.onSound(DetectedSound.Loud, function () {
-    score += 100
 })
 input.onButtonPressed(Button.B, function () {
     man.move(1)
@@ -83,6 +83,7 @@ basic.forever(function () {
         man.set(LedSpriteProperty.Y, 2)
         score += 1
         level += 1
+        speed += -50
         music.playTone(587, music.beat(BeatFraction.Whole))
     }
 })
